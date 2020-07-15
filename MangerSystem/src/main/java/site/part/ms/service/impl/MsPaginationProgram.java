@@ -3,6 +3,7 @@ package site.part.ms.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import lombok.Getter;
@@ -11,7 +12,8 @@ import site.part.ms.entity.Program;
 import site.part.ms.service.PaginationAdapter;
 import site.part.ms.service.ProgramService;
 
-@Service
+@Scope(value="prototype")
+@Service()
 public class MsPaginationProgram implements PaginationAdapter<List<Program>> {
 	@Getter @Setter private int current = 0;
 	@Getter @Setter private int count=10;

@@ -16,10 +16,13 @@ import org.springframework.stereotype.Component;
 @Order(1)
 @WebFilter(urlPatterns = "/**",filterName = "firstFilter")
 public class MyFilter implements Filter{
-
+	public long count=0;
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		count++;
+		System.out.println("this is first filter.");
+		System.out.println("第"+count+"访问系统");
 		chain.doFilter(request, response);
 	}
 
