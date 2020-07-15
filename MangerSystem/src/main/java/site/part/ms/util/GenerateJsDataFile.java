@@ -10,11 +10,7 @@ import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 该类用于将数据写入到js文件中去
@@ -66,8 +62,8 @@ public class GenerateJsDataFile {
 	 */
 	public StringBuffer JsText(Object dataobj) {
 		StringBuffer jsContents=new StringBuffer();
+		jsContents.append("{");
 		List<String> fieldNames=new LinkedList<String>();
-		jsContents.append("_$data={");
 		Class<?> clazz=dataobj.getClass();
 		Field[] fields=clazz.getDeclaredFields();
 		for(Field field:fields) {
@@ -77,21 +73,18 @@ public class GenerateJsDataFile {
 		}
 		Method[] methods=clazz.getDeclaredMethods();
 		for(Method method:methods) {
+			method.setAccessible(true);
 			String fn=getFieldGetMethod(method, fieldNames);
 			if(fn!=null) {
 				try {
 					Class<?> returnType=method.getReturnType();
-					Object returnValue=method.invoke(dataobj, null);
 					jsContents.append(fn+":");
-					if(returnType==String.class) {						
-						jsContents.append("\""+returnValue+"\",");
-					}else if(returnType==int.class||returnType==Integer.class||returnType==float.class||returnType==Float.class){
-						
-					}else {						
-						jsContents.append(returnValue+",");
-					}
+					String t=getObjectStr(returnType,method,dataobj).toString();
+					jsContents.append(t);
 				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					System.out.println("调用get方法出错");
+					e.printStackTrace();
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -100,37 +93,82 @@ public class GenerateJsDataFile {
 		jsContents.append("}");
 		return jsContents;
 	}
+
+	/**
+	 * 获取每个类型的字符串
+	 * @param returnType
+	 * @param method
+	 * @param orgObj
+	 * @return
+	 * @throws Exception
+	 */
 	public StringBuffer getObjectStr(Class<?> returnType,Method method,Object orgObj) throws Exception {
 		StringBuffer sb=new StringBuffer();
 		if(returnType==String.class) {
-			
+			String s=(String) method.invoke(orgObj,null);
+			sb.append("\""+s+"\"");
 		}else if(returnType==int.class||returnType==Integer.class){
-			
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}else if(returnType==float.class||returnType==Float.class) {
-			
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}else if(returnType==double.class||returnType==Double.class) {
-			
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}else if(returnType==byte.class||returnType==Byte.class) {
-			
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}else if(returnType==char.class||returnType==Character.class) {
-			
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}else if(returnType==short.class||returnType==Short.class) {
-			
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}else if(returnType==long.class||returnType==Long.class) {
-			
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}else if(returnType==boolean.class||returnType==Boolean.class) {
-			
-		} /*
-			 * else if(returnType.newInstance() instanceof List) { List l=(List)
-			 * method.invoke(orgObj, null); }
-			 */
-		else if(returnType.newInstance() instanceof Map) {
-			Map m=(Map)method.invoke(orgObj, null);
-		}else if(returnType.newInstance() instanceof Collection) {
-			Collection c=(Collection)method.invoke(orgObj, null);
-		}else {
-			JsText(orgObj);
+			Object o=method.invoke(orgObj,null);
+			sb.append(o);
 		}
+		else if(Map.class.isAssignableFrom(returnType)) {
+			Map<Object,Object> m=(Map)method.invoke(orgObj, null);
+			StringBuffer maps=new StringBuffer();
+			maps.append("{");
+			for(Map.Entry<Object,Object> entry:m.entrySet()){
+				Object a=entry.getValue();
+				if(a instanceof String){
+					maps.append(entry.getKey()).append(":").append("\""+a+"\"").append(",");
+				}else{
+					maps.append(entry.getKey()).append(":").append(a).append(",");
+				}
+
+			}
+			maps.deleteCharAt(maps.length()-1);
+			maps.append("}");
+			sb.append(maps);
+		}else if(Collection.class.isAssignableFrom(returnType)) {
+			StringBuffer sc=new StringBuffer();
+			Collection c=(Collection)method.invoke(orgObj, null);
+			Iterator iterable= c.iterator();
+			sc.append("[");
+			while(iterable.hasNext()){
+				Object a=iterable.next();
+				if(a instanceof String){
+					sc.append("\""+a+"\""+",");
+				}else{
+					sc.append(a+",");
+				}
+			}
+			sc.deleteCharAt(sc.length()-1);
+			sc.append("]");
+			sb.append(sc);
+		}else {
+			Object o=method.invoke(orgObj,null);
+			sb=JsText(o);
+		}
+		sb.append(",");
 		return sb;
 	}
 	/**
