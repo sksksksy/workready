@@ -1,6 +1,5 @@
 package site.part.ms.util;
 
-import java.awt.geom.Area;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -105,35 +104,35 @@ public class GenerateJsDataFile {
 	public StringBuffer getObjectStr(Class<?> returnType,Method method,Object orgObj) throws Exception {
 		StringBuffer sb=new StringBuffer();
 		if(returnType==String.class) {
-			String s=(String) method.invoke(orgObj,null);
+			String s=(String) method.invoke(orgObj);
 			sb.append("\""+s+"\"");
 		}else if(returnType==int.class||returnType==Integer.class){
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}else if(returnType==float.class||returnType==Float.class) {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}else if(returnType==double.class||returnType==Double.class) {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}else if(returnType==byte.class||returnType==Byte.class) {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}else if(returnType==char.class||returnType==Character.class) {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}else if(returnType==short.class||returnType==Short.class) {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}else if(returnType==long.class||returnType==Long.class) {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}else if(returnType==boolean.class||returnType==Boolean.class) {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb.append(o);
 		}
 		else if(Map.class.isAssignableFrom(returnType)) {
-			Map<Object,Object> m=(Map)method.invoke(orgObj, null);
+			Map<Object,Object> m=(Map)method.invoke(orgObj);
 			StringBuffer maps=new StringBuffer();
 			maps.append("{");
 			for(Map.Entry<Object,Object> entry:m.entrySet()){
@@ -150,7 +149,7 @@ public class GenerateJsDataFile {
 			sb.append(maps);
 		}else if(Collection.class.isAssignableFrom(returnType)) {
 			StringBuffer sc=new StringBuffer();
-			Collection c=(Collection)method.invoke(orgObj, null);
+			Collection c=(Collection)method.invoke(orgObj);
 			Iterator iterable= c.iterator();
 			sc.append("[");
 			while(iterable.hasNext()){
@@ -165,7 +164,7 @@ public class GenerateJsDataFile {
 			sc.append("]");
 			sb.append(sc);
 		}else {
-			Object o=method.invoke(orgObj,null);
+			Object o=method.invoke(orgObj);
 			sb=JsText(o);
 		}
 		sb.append(",");
