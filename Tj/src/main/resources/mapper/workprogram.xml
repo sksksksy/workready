@@ -4,15 +4,44 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.tj.program.mapper.WorkProgramMapper">
  	<insert id="saveDayRecords">
- 		insert into day_records(REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY) values();
+ 		insert into day_records(REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY)
+ 		values(
+ 		#{dayR.revision},
+ 		#{dayR.createdBy},
+ 		#{dayR.createdTime},
+ 		#{dayR.updatedByid},
+ 		#{dayR.updatedTime},
+ 		#{dayR.progNo},
+ 		#{dayR.addr},
+ 		#{dayR.dayId},
+ 		#{dayR.notePay}
+ 		);
  	</insert>
  	<insert id="saveEmplyees">
  		INSERT INTO EMPLYEES(CREATED_BY,CREATED_TIME,UPDATEDBY_,UPDATED_TIME,EMPL_NO,
- 		EMPL_NAME,EMPL_NUMBER,EMPL_AGE,EMPL_ADDR) VALUES();
+ 		EMPL_NAME,EMPL_NUMBER,EMPL_AGE,EMPL_ADDR) VALUES(
+ 		#{empl.createdBy},
+ 		#{empl.createdTime},
+ 		#{empl.updatedby_},
+ 		#{empl.updatedTime},
+ 		#{empl.emplNo},
+ 		#{empl.emplName},
+ 		#{empl.emplNumber},
+ 		#{empl.emplAge},
+ 		#{empl.emplAddr}
+ 		);
  	</insert>
  	<insert id="saveEmplyeesRecord">
  		INSERT INTO EMPLYEES_RECORD(CREATED_BY,CREATED_TIME,ID,EMPL_NO,PROG_NO,MONEY,DAYS) 
- 		VALUES();
+ 		VALUES(
+ 		#{emplRe.createdBy},
+ 		#{emplRe.createdTime},
+ 		#{emplRe.id},
+ 		#{emplRe.emplNo},
+ 		#{emplRe.progNo},
+ 		#{emplRe.money},
+ 		#{emplRe.days}
+ 		);
  	</insert>
  	<insert id="saveWorkPrograms">
  		INSERT INTO WORK_PROGRAMS(
@@ -20,7 +49,25 @@
  		UPDATED_TIME,PROG_NO,PROG_NAME,PROG_ADDR,PROG_MAN,
  		PROG_DAYS,PROG_PAY,PROG_HAS_PAY,PROG_ADD_PAY,
  		PROG_NOPAY,PROG_STATUS,CUCYCD,PROG_IINFOS)
- 		VALUES();
+ 		VALUES(
+ 		#{workp.revision},
+ 		#{workp.createdBy},
+ 		#{workp.createdTime},
+ 		#{workp.updatedBy},
+ 		#{workp.updatedTime},
+ 		#{workp.progNo},
+ 		#{workp.progName},
+ 		#{workp.progAddr},
+ 		#{workp.progMan},
+ 		#{workp.progDyas},
+ 		#{workp.progPay},
+ 		#{workp.progHasPay},
+ 		#{workp.progAddPay},
+ 		#{workp.progNopay},
+ 		#{workp.progStatus},
+ 		#{workp.cucycd},
+ 		#{workp.progIinfos}
+ 		);
  	</insert>
  	<update id="updateDayRecords">
  	
