@@ -9,7 +9,12 @@ import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 该类用于将数据写入到js文件中去
@@ -34,8 +39,8 @@ public class GenerateJsDataFile {
 		try {
 			fos=new FileOutputStream(this.FILENAME);
 			fosc=fos.getChannel();
-			String text=JsText(dataobj).toString();
-			ByteBuffer byteBuffer=Charset.forName("utf-8").encode(text);
+			String text=JsonText(dataobj).toString();
+			ByteBuffer byteBuffer=Charset.forName("utf-8").encode("_$data={"+text+"}");
 			int len=0;
 			while((len=fosc.write(byteBuffer))!=0) {
 				System.out.println("file length have written! "+len);
@@ -59,7 +64,7 @@ public class GenerateJsDataFile {
 	 * @param dataobj
 	 * @return
 	 */
-	public StringBuffer JsText(Object dataobj) {
+	public StringBuffer JsonText(Object dataobj) {
 		StringBuffer jsContents=new StringBuffer();
 		jsContents.append("{");
 		List<String> fieldNames=new LinkedList<String>();
@@ -132,10 +137,10 @@ public class GenerateJsDataFile {
 			sb.append(o);
 		}
 		else if(Map.class.isAssignableFrom(returnType)) {
-			Map<Object,Object> m=(Map)method.invoke(orgObj);
+			Map<?,?> m=(Map<?,?>)method.invoke(orgObj);
 			StringBuffer maps=new StringBuffer();
 			maps.append("{");
-			for(Map.Entry<Object,Object> entry:m.entrySet()){
+			for(Entry<?, ?> entry:m.entrySet()){
 				Object a=entry.getValue();
 				if(a instanceof String){
 					maps.append(entry.getKey()).append(":").append("\""+a+"\"").append(",");
@@ -149,8 +154,8 @@ public class GenerateJsDataFile {
 			sb.append(maps);
 		}else if(Collection.class.isAssignableFrom(returnType)) {
 			StringBuffer sc=new StringBuffer();
-			Collection c=(Collection)method.invoke(orgObj);
-			Iterator iterable= c.iterator();
+			Collection<?> c=(Collection<?>)method.invoke(orgObj);
+			Iterator<?> iterable= c.iterator();
 			sc.append("[");
 			while(iterable.hasNext()){
 				Object a=iterable.next();
@@ -165,7 +170,7 @@ public class GenerateJsDataFile {
 			sb.append(sc);
 		}else {
 			Object o=method.invoke(orgObj);
-			sb=JsText(o);
+			sb=JsonText(o);
 		}
 		sb.append(",");
 		return sb;
