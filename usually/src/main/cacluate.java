@@ -20,7 +20,10 @@ public class cacluate {
 	private final String DIVD="/";
 	public static void main(String[] args) {
 		cacluate c=new cacluate();
+		long s=System.currentTimeMillis();
 		c.parser("3*((1+2)*2+1)");
+		long e=System.currentTimeMillis();
+		System.out.println((e-s)+"ms");
 	}
 	void parser(String str) {
 		int len=str.length();

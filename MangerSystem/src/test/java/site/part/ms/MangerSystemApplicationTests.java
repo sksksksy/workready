@@ -23,7 +23,7 @@ class MangerSystemApplicationTests {
 		user.setPassword("123456");
 		user.setEmplyeeNo("10086");
 		GenerateJsDataFile gjdf=new GenerateJsDataFile();
-		String re=gjdf.JsText(user).toString();
+		String re=gjdf.JsonText(user).toString();
 		System.out.println(re);
 	}
 }

@@ -12,7 +12,8 @@ public class mytest {
 		m.generateJs();
 	}
 	void generateJs() {
-		System.out.println(Collection.class.isAssignableFrom(List.class));
+//		System.out.println();
+		assert Collection.class.isAssignableFrom(Map.class);
 		/*User user=new User();
 		user.setUserId("jjjjjjj");
 		user.setUserName("youname");
@@ -38,8 +39,11 @@ public class mytest {
 		jn.setId("10086");
 		jn.setJname("bike");
 		t.setJineng(jn);
-		String r=gjdf.JsText(t).toString();
+		long s=System.currentTimeMillis();
+		String r=gjdf.JsonText(t).toString();
+		long e=System.currentTimeMillis();
 		System.out.println(r);
+		System.out.println((e-s)+"ms");
 
 	}
 }

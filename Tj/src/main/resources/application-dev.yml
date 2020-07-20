@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    continue-on-error: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: mysql://112.124.4.172/programs_tj?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=GMT%2B8
+    username: root
+    password: your127@Y
+  mvc:
+    view:
+      suffix: .html
+mybatis:
+  mapper-localtions:
+  - classpath:mapper/*.xml

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.tj.program.mapper.WorkProgramMapper">
+ 	<insert id="saveDayRecords">
+ 		insert into day_records(REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY) values();
+ 	</insert>
+ 	<insert id="saveEmplyees">
+ 		INSERT INTO EMPLYEES(CREATED_BY,CREATED_TIME,UPDATEDBY_,UPDATED_TIME,EMPL_NO,
+ 		EMPL_NAME,EMPL_NUMBER,EMPL_AGE,EMPL_ADDR) VALUES();
+ 	</insert>
+ 	<insert id="saveEmplyeesRecord">
+ 		INSERT INTO EMPLYEES_RECORD(CREATED_BY,CREATED_TIME,ID,EMPL_NO,PROG_NO,MONEY,DAYS) 
+ 		VALUES();
+ 	</insert>
+ 	<insert id="saveWorkPrograms">
+ 		INSERT INTO WORK_PROGRAMS(
+ 		REVISION,CREATED_BY,CREATED_TIME,UPDATED_BY,
+ 		UPDATED_TIME,PROG_NO,PROG_NAME,PROG_ADDR,PROG_MAN,
+ 		PROG_DAYS,PROG_PAY,PROG_HAS_PAY,PROG_ADD_PAY,
+ 		PROG_NOPAY,PROG_STATUS,CUCYCD,PROG_IINFOS)
+ 		VALUES();
+ 	</insert>
+ 	<update id="updateDayRecords">
+ 	
+ 	</update>
+ 	<update id="updateEmplyees">
+ 	
+ 	</update>
+ 	<update id="updateEmplyeesRecord">
+ 	
+ 	</update>
+ 	<update id="updateWorkPrograms">
+ 	
+ 	</update>
+ 	<delete id="deleteDayRecords">
+ 	
+ 	</delete>
+ 	<delete id="deleteEmplyees">
+ 	
+ 	
+ 	</delete>
+ 	<delete id="deleteEmplyeesRecord">
+ 	
+ 	
+ 	</delete>
+ 	<delete id="deleteWorkPrograms">
+ 	
+ 	
+ 	</delete>
+ 	<select id="selectDayRecords">
+ 	
+ 	
+ 	</select>
+ 	<select id="selectEmplyees">
+ 	
+ 	
+ 	</select>
+ 	<select id="selectEmplyeesRecord">
+ 	
+ 	</select>
+ 	<select id="selectWorkPrograms">
+ 	
+ 	</select>
+</mapper>
