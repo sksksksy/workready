@@ -2,11 +2,215 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="./js/jquery-3.4.1.min.js"></script>
     <title>main</title>
 </head>
 <body>
 <div>
-    <div></div>
+    <select id="select">
+        <optgroup label="项目">
+            <option value="02">新增员工</option>
+            <option value="03">记录</option>
+            <option value="04">新建项目</option>
+        </optgroup>
+        <option value="01">打卡</option>
+    </select>
+    <div id="01">
+        <form id="day_records" method="POST" action="/save/day_records">
+            <table>
+                <tr>
+                    <td>创建人</td><td><input  name="createdBy" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>创建时间</td><td><input  name="createdTime" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>更新人</td><td><input  name="updatedByid" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>更新时间</td><td><input  name="updatedTime" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目编号</td><td><input  name="progNo" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>地址</td><td><input  name="addr" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>id</td><td><input  name="dayId" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>备注金额</td><td><input  name="notePay" type="text"/></td>
+                </tr>
+                <tr>
+                    <td><input  name="save"" type="submit" value="保存"/></td><td><input  name="reset" type="reset" value="重置"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="02">
+        <form id="emplyees" method="POST" action="/save/emplyees">
+            <table>
+                <tr>
+                    <td>创建人</td><td><input  name="createdBy" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>创建时间</td><td><input  name="createdTime" type="date"/></td>
+                </tr>
+                <tr>
+                    <td>更新人</td><td><input  name="updatedby_" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>更新时间</td><td><input  name="updatedTime" type="date"/></td>
+                </tr>
+                <tr>
+                    <td>职工编号</td><td><input  name="emplNo" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>职工姓名</td><td><input  name="emplName" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>电话</td><td><input  name="emplNumber" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>年龄</td><td><input  name="emplAge" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>籍贯</td><td><input  name="emplAddr" type="text"/></td>
+                </tr>
+                <tr>
+                    <td><input  name="save"" type="submit" value="保存"/></td><td><input  name="reset" type="reset" value="重置"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="03">
+        <form id="emplyees_record" method="POST" action="/save/emplyees_record">
+            <table>
+                <tr>
+                    <td>创建人</td><td><input  name="createdBy" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>创建时间</td><td><input  name="createdTime" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>主键</td><td><input  name="id" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>职工编号</td><td><input  name="emplNo" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目编号</td><td><input  name="progNo" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>在该项目所得金额</td><td><input  name="money" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>在该项目天数</td><td><input  name="days" type="text"/></td>
+                </tr>
+                <tr>
+                    <td><input  name="save"" type="submit" value="保存"/></td><td><input  name="reset" type="reset" value="重置"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>   
+    <div id="04">
+        <form id="work_programs" method="POST" action="/save/work_programs">
+            <table>
+                <tr>
+                    <td>创建人</td><td><input  name="createdBy" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>创建时间</td><td><input  name="createdTime" type="date"/></td>
+                </tr>
+                <tr>
+                    <td>更新人</td><td><input  name="updatedBy" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>更新时间</td><td><input  name="updatedTime" type="date"/></td>
+                </tr>
+                <tr>
+                    <td>项目编号</td><td><input  name="progNo" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目名称</td><td><input  name="progName" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目地址</td><td><input  name="progAddr" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目负责人</td><td><input  name="progMan" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目工期(单位：天)</td><td><input  name="progDyas" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>合同金额</td><td><input  name="progPay" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>已付金额</td><td><input  name="progHasPay" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>追加金额</td><td><input  name="progAddPay" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>待支付金额</td><td><input  name="progNopay" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目状态</td><td><input  name="progStatus" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>金额币种</td><td><input  name="cucycd" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>项目说明</td><td>
+                        <textarea name="progIinfos">
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input  name="save" type="submit" value="保存"/></td><td><input  name="reset" type="reset" value="重置"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        window.onload=function(){
+            $('#select option').each(function(){
+                    iid='#'+$(this).val();
+                    $(iid).css({"display": "none","visibility": "hidden"});
+                });
+            $("#select").on("change",function(){
+                $('#select option').each(function(){
+                    iid='#'+$(this).val();
+                    $(iid).css({"display": "none","visibility": "hidden"});
+                });
+                id='#'+$(this).val();
+                $(id).css({"display": "block","visibility": "visible"});
+            });
+            // console.log(getData("04"));
+        };
+        function getData(n,ismap=false){
+            var str="";
+            // var map=new Map();
+            $("#"+n).find(":input").each(function(i,e){
+                if(e.getAttribute("type")=="submit"||e.getAttribute("type")=="reset"){
+                    return;
+                }
+                // console.log(e.getAttribute("name"));
+                es=e.val==undefined?"":e.val;
+                str=str+e.getAttribute("name")+"="+es+"&";
+                // map.set(e.getAttribute("name"),es);
+            });
+            // console.log(map);
+            return str.substring(0,str.length-1);
+        
+        }
+        // $("input[type=='submit']").on("click",function(){
+            
+        // });
+    </script>
 </div>
 </body>
 </html>

@@ -25,6 +25,9 @@ public class GennerallyUtil {
 		SimpleDateFormat sdf=new SimpleDateFormat(pattern);
 		return sdf.format(t);
 	}
+	public final static String getBytes() {
+		return null;
+	}
 	/**
 	 * 关闭输出流
 	 * @param out

@@ -3,6 +3,8 @@ package site.tj.program.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 public class Emplyees implements Serializable,Cloneable{
     /**
@@ -12,10 +14,12 @@ public class Emplyees implements Serializable,Cloneable{
 	/** 创建人(创建人) */
     private String createdBy ;
     /** 创建时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdTime ;
     /** 最近一次更新人 */
     private String updatedby_ ;
     /** 更新时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedTime ;
     /** 职工编号 */
     private String emplNo ;
