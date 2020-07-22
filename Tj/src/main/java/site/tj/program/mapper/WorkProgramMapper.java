@@ -1,5 +1,7 @@
 package site.tj.program.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import org.apache.ibatis.annotations.Param;
@@ -25,8 +27,9 @@ public interface WorkProgramMapper {
 		public int deleteEmplyeesRecord(@Param("emplRe") EmplyeesRecord emplRe);
 		public int deleteWorkPrograms(@Param("workp") WorkPrograms workProgram);
 		
-		public int selectDayRecords(@Param("dayR") DayRecords dayRecords);
-		public int selectEmplyees(@Param("empl") Emplyees empl);
-		public int selectEmplyeesRecord(@Param("emplRe") EmplyeesRecord emplRe);
-		public int selectWorkPrograms(@Param("workp") WorkPrograms workProgram);
+		public List<DayRecords> selectDayRecords();
+		public List<Emplyees> selectEmplyees();
+		public List<EmplyeesRecord> selectEmplyeesRecord();
+		public List<WorkPrograms> selectWorkPrograms();
+		
 }

@@ -10,8 +10,12 @@ public class URLMapping {
 	public String index() {
 		return "index";
 	}
-	@GetMapping("/index")
+	@GetMapping("/add")
 	public String index01() {
-		return "index";
+		return "addwork";
+	}
+	@GetMapping("/proglist")
+	public String prog_list() {
+		return "prog_list";
 	}
 }

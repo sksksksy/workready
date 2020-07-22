@@ -4,6 +4,8 @@ package site.tj.program.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 public class DayRecords implements Serializable,Cloneable{
     /**
@@ -15,10 +17,12 @@ public class DayRecords implements Serializable,Cloneable{
     /** 创建人(职工号) */
     private String createdBy ;
     /** 创建时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdTime ;
     /** 更新人(职工号) */
     private String updatedByid ;
     /** 更新时间 */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedTime ;
     /** 项目编号 */
     private String progNo ;

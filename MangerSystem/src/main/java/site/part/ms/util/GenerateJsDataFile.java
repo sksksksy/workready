@@ -9,7 +9,9 @@ import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -135,6 +137,10 @@ public class GenerateJsDataFile {
 		}else if(returnType==boolean.class||returnType==Boolean.class) {
 			Object o=method.invoke(orgObj);
 			sb.append(o);
+		}else if(returnType==Date.class) {
+			Object o=method.invoke(orgObj);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			sb.append("\""+sdf.format(o)+"\"");
 		}
 		else if(Map.class.isAssignableFrom(returnType)) {
 			Map<?,?> m=(Map<?,?>)method.invoke(orgObj);

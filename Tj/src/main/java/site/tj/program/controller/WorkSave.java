@@ -12,21 +12,25 @@ import site.tj.program.entity.Emplyees;
 import site.tj.program.entity.EmplyeesRecord;
 import site.tj.program.entity.WorkPrograms;
 import site.tj.program.mapper.WorkProgramMapper;
+import site.tj.program.service.UsuallyUtil;
 
 @Controller
-public class WorkMananger {
+public class WorkSave {
 	
 	@Autowired(required = false)
 	WorkProgramMapper workProgramMapper;
 	
 	Map<Integer,String> status=new HashMap<Integer, String>();
-	public WorkMananger(){
+	public WorkSave(){
 		status.put(0, "成功");
 		status.put(-1, "失败");
 	}
 	@PostMapping("/save/day_records")
 	@ResponseBody
 	public String saveDayRecords(DayRecords dayr){
+		dayr.setDayId(UsuallyUtil.getUUId());
+		dayr.setCreatedTime(UsuallyUtil.getNowData());
+		dayr.setUpdatedTime(UsuallyUtil.getNowData());
 		int i= workProgramMapper.saveDayRecords(dayr);
 		i=i>0?0:-1;
 		return status.get(i);
@@ -34,13 +38,17 @@ public class WorkMananger {
 	@PostMapping("/save/emplyees")
 	@ResponseBody
 	public String saveEmplyees(Emplyees emplyees){
+		emplyees.setCreatedTime(UsuallyUtil.getNowData());
+		emplyees.setUpdatedTime(UsuallyUtil.getNowData());
 		int i= workProgramMapper.saveEmplyees(emplyees);
 		i=i>0?0:-1;
 		return status.get(i);
 	}
 	@PostMapping("/save/emplyees_record")
 	@ResponseBody
-	public String saveEmplyeesRecord(EmplyeesRecord emplyeesRecord){
+	public String saveEmplyeesRecord(EmplyeesRecord emplyeesRecord){	
+		emplyeesRecord.setId(UsuallyUtil.getUUId());
+		emplyeesRecord.setCreatedTime(UsuallyUtil.getNowData());
 		int i= workProgramMapper.saveEmplyeesRecord(emplyeesRecord);
 		i=i>0?0:-1;
 		return status.get(i);
@@ -48,6 +56,8 @@ public class WorkMananger {
 	@PostMapping("/save/work_programs")
 	@ResponseBody
 	public String saveWorkPrograms(WorkPrograms workPrograms){
+		workPrograms.setCreatedTime(UsuallyUtil.getNowData());
+		workPrograms.setUpdatedTime(UsuallyUtil.getNowData());
 		int i= workProgramMapper.saveWorkPrograms(workPrograms);
 		i=i>0?0:-1;
 		return status.get(i);
