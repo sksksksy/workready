@@ -39,7 +39,7 @@ public class WorkPrograms implements Serializable,Cloneable{
     /** 待支付金额 */
     private Double progNopay ;
     /** 项目状态 */
-    private Integer progStatus ;
+    private String progStatus ;
     /** 金额币种 */
     private String cucycd ;
     /** 项目说明 */
@@ -158,11 +158,11 @@ public class WorkPrograms implements Serializable,Cloneable{
         this.progNopay = progNopay;
     }
     /** 项目状态 */
-    public Integer getProgStatus(){
+    public String getProgStatus(){
         return this.progStatus;
     }
     /** 项目状态 */
-    public void setProgStatus(Integer progStatus){
+    public void setProgStatus(String progStatus){
         this.progStatus = progStatus;
     }
     /** 金额币种 */
@@ -180,5 +180,5 @@ public class WorkPrograms implements Serializable,Cloneable{
     /** 项目说明 */
     public void setProgIinfos(String progIinfos){
         this.progIinfos = progIinfos;
-    }
+    }  
 }

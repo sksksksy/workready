@@ -4,13 +4,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import site.tj.program.service.impl.SequenceService;
+
+@Component
 public class UsuallyUtil {
+	
+	@Autowired
+	SequenceService sequence;
 	/**
 	 * 获取当前系统时间，使用pattern控制格式
 	 * @param pattern
 	 * @return
 	 */
-	public final static String getNowTime(String pattern) {
+	public final  String getNowTime(String pattern) {
 		SimpleDateFormat s=new SimpleDateFormat(pattern);
 		return s.format(System.currentTimeMillis());
 	}
@@ -18,7 +27,7 @@ public class UsuallyUtil {
 	 * 获取时间
 	 * @return
 	 */
-	public final static Date getNowData() {
+	public final  Date getNowData() {
 		return new Date();
 	}
 	/**
@@ -26,13 +35,14 @@ public class UsuallyUtil {
 	 * @param type
 	 * @return
 	 */
-	public final static String No(String type) {
-		String d=getNowTime("yyyyMMddHHmmss");
-		int i=(int) Math.floor(Math.random()*10);
-		String a=Integer.toHexString(i<<4);
-		return type+"_"+d+a;
+	public final String SeqNo(String type) {
+		String d=getNowTime("yyyyMMdd");
+		int r=sequence.getSequenceNo(type);
+		String a=type+"_"+d+"#"+r;
+		System.out.println("生成的编号："+a+" type:"+type);
+		return a;
 	}
-	public final static String getUUId() {
+	public final  String getUUId() {
 		String a=UUID.randomUUID().toString();
 		return a.replace("-", "");
 	}

@@ -172,6 +172,9 @@
                         </textarea>
                     </td>
                 </tr>
+                <!-- <tr>
+                    <td>员工号</td><td><input  name="emplNo" type="text"/></td>
+                </tr> -->
                 <tr>
                     <td><input  name="save" type="button" value="保存" onclick="fsave('#04')"/></td><td><input  name="reset" type="reset" value="重置"/></td>
                 </tr>
@@ -236,7 +239,10 @@
             s=d.substr(2,1);
             i=parseInt(s);
             console.log(urls[i-1]);
-            RequestSend("post",_data,urls[i-1]);
+            RequestSend("post",_data,urls[i-1],saveSuccessful);
+        }
+        function saveSuccessful(data){
+            alert(data);
         }
     </script>
 </div>

@@ -98,21 +98,33 @@
  	</delete>
  	<select id="selectDayRecords" resultMap="dayrecord">
  		select REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY
- 		from day_records;
+ 		from day_records 
+ 		<if test="isPagination">
+ 			limit #{currentNo},#{pageSize}
+ 		</if>;
  	</select>	
  	<select id="selectEmplyees" resultMap="emply">
  		select CREATED_BY,CREATED_TIME,UPDATEDBY_,UPDATED_TIME,EMPL_NO,
- 		EMPL_NAME,EMPL_NUMBER,EMPL_AGE,EMPL_ADDR from EMPLYEES;
+ 		EMPL_NAME,EMPL_NUMBER,EMPL_AGE,EMPL_ADDR from EMPLYEES
+ 		<if test="isPagination">
+ 			limit #{currentNo},#{pageSize}
+ 		</if>;
  	</select>
  	<select id="selectEmplyeesRecord" resultMap="emplyrecord">
  		select CREATED_BY,CREATED_TIME,ID,EMPL_NO,PROG_NO,MONEY,DAYS
- 		from EMPLYEES_RECORD;
+ 		from EMPLYEES_RECORD
+ 		<if test="isPagination">
+ 			limit #{currentNo},#{pageSize}
+ 		</if>;
  	</select>
  	<select id="selectWorkPrograms" resultMap="workprog">
  		select REVISION,CREATED_BY,CREATED_TIME,UPDATED_BY,
  		UPDATED_TIME,PROG_NO,PROG_NAME,PROG_ADDR,PROG_MAN,
  		PROG_DAYS,PROG_PAY,PROG_HAS_PAY,PROG_ADD_PAY,
- 		PROG_NOPAY,PROG_STATUS,CUCYCD,PROG_IINFOS from WORK_PROGRAMS;
+ 		PROG_NOPAY,PROG_STATUS,CUCYCD,PROG_IINFOS from WORK_PROGRAMS
+		<if test="isPagination">
+ 			limit #{currentNo},#{pageSize}
+ 		</if>;
  	</select>
  	<resultMap type="site.tj.program.entity.EmplyeesRecord" id="emplyrecord">
  		<result column="CREATED_BY" property="createdBy"></result>

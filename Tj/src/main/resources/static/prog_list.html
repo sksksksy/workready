@@ -10,13 +10,22 @@
           /* color:black; */
           border-collapse:collapse;
           border:1px black solid;
+          empty-cells: show;
       }
-      .table-list tr{
+      table td,th{
+        word-break: keep-all;
+        white-space: nowrap;
+      }
+      .table-list tbody tr{
         border: 1px gray solid;
         table-layout: fixed;
       }
-      .table-list tr td{
+      .table-list tbody tr td{
         border: 1px gray solid;
+      }
+      #xtable{
+        overflow: auto;
+        width: 100%;
       }
     </style>
 </head>
@@ -32,52 +41,61 @@
     </div>
     <div>
           <div>
-              <input type="button" value="删除"  onclick="del()">
+              <input type="button" value="删除"  onclick="selectAll()">
                <div id="table">
+                 <div id="xtable">
                   <table class="table-list" cellpadding="10">
-                    <tr v-for="item in tableData" :key="item.id">
-                      <td><input type="checkbox" :name="item.name" :value="item.id"/></td>
+                    <thead>
+                      <td></td>
+                      <td v-for="h in tableHead">{{h}}</td>
+                      <td></td>
+                      <td></td>
+                    </thead>
+                    <tr v-for="item in tableData" :key="vval(item)">
+                      <td><input type="checkbox" :name="item.name" :value="vval(item)"/></td>
                       <td v-for="(v,k,i) in item" v-if="i!=0">{{v}}</td>
                       <!-- <td>{{item.date}}</td>
                       <td>{{item.name}}</td>
                       <td>{{item.address}}</td> -->
-                      <td><button :id="item.id" :value="item.id" onclick="zclick(this)">edit</button></td>
-                      <td><button :id="item.id" :value="item.id" onclick="zclick(this)">delete</button></td>
+                      <td><button :value="vval(item)" onclick="zclick(this)" name="edit">edit</button></td>
+                      <td><button :value="vval(item)" onclick="zclick(this)" name="delete">delete</button></td>
                       </tr>
-                  </table>
+                  </table>  
+                </div>
                   <input type="button" value="上一页" sgin="previous" onclick="changePage(this)"><input type="button" value="下一页" sgin="next" onclick="changePage(this)">
                </div>
+               
+            </div>
+            <div>
+              <p>没有什么不同</p>
             </div>
     </div>
     <script src="js/common/page_list.js"></script>
     <script>
       window.onload=function(){
         urls=["/all/dayrecord","/all/empl","/all/emplrecord","/all/wrokprogram"];
-        getList(urls[0]);
+        datas.currentUrl=urls[0];
+        da=pageDataJson();
+        zhttp(datas.currentUrl,"post",da,getList);
         $("#showlist").on("change",function(){
           var s=this.value;
           s01=s.substr(1,1);
           i=parseInt(s01);
           v.$data.pages.current=0;
+          v.$data.vindex=i;
+          datas.currentUrl=urls[i-1];
           getList(urls[i-1]);
+          da=pageDataJson();
+          zhttp(datas.currentUrl,"post",da,getList);
         });
-        function getList(vurl){
-          $.ajax({
-          url:vurl,
-          method:"get",
-          data:null,
-          success:function(resp){
-            if(resp.msg=="查询失败!"){
+        function getList(resp){
+          if(resp.msg=="查询失败!"){
                 alert(resp.msg);
                 return;
             }
             // alert(resp.msg);
-            v.$data.tableData=resp.vdata;
-          },
-          error:function(resp){
-              alert(resp);
-          }
-        })
+            v.$data.tableData=resp.tdata;
+            v.$data.tableHead=resp.thead;
         }
       }
     </script>

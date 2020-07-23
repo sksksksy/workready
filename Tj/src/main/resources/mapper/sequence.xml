@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.tj.program.mapper.ProgSequenceMapper">
+ 	<select id="getSequenceNo" resultType="int">
+ 		select prog_sequenceno from prog_sequence where prog_type=#{prog_type};
+ 	</select>
+ 	<select id="getAllType">
+ 		select prog_type from prog_sequence;
+ 	</select>
+ 	<insert id="setSequenceNo">
+ 		insert into prog_sequence(prog_sequenceno,prog_type) values(#{sequence_no},#{prog_type});
+ 	</insert>
+ 	<update id="updateSequenceNo">
+ 		update prog_sequence set prog_sequenceno=#{sequence_no} where prog_type=#{prog_type};
+ 	</update>
+</mapper>

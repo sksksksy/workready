@@ -1,0 +1,145 @@
+<!-- 该文件是一个动态table的框架性文件，要使用必须引入jquery,和vue -->
+<!DOCTYPE html>
+<head>
+    <title>
+        table
+    </title>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <style>
+        .table-list{
+            /* color:black; */
+            border-collapse:collapse;
+            border:1px black solid;
+        }
+        .table-list tr{
+          border: 1px gray solid;
+          table-layout: fixed;
+        }
+        .table-list tr td{
+          border: 1px gray solid;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <div>
+                <input type="button" value="删除已选中"  onclick="selectAll()">
+                 <div id="table">
+                    <table class="table-list" cellpadding="10">
+                      <tr v-for="item in tableData" :key="vval(item)">
+                        <td><input type="checkbox" :name="item.name" :value="vval(item)"/></td>
+                        <td v-for="(v,k,i) in item" v-if="i!=0">{{v}}</td>
+                        <td><button :value="vval(item)" onclick="zclick(this)" name="edit">edit</button></td>
+                        <td><button :value="vval(item)" onclick="zclick(this)" name="delete">delete</button></td>
+                        </tr>
+                    </table>
+                    <input type="button" value="上一页" sgin="previous" onclick="changePage(this)">
+                    <input type="button" value="下一页" sgin="next" onclick="changePage(this)">
+                 </div>
+            </div>
+      </div> 
+    </div>
+    <script>
+ datas=
+        {
+            pages:{//分页信息
+                current:0,//当前页数
+                count:100,//总页数
+                pageSize:10 //每页数量
+            },
+            tableData: [{"name":"zzz","age":12,"addr":"chongq"}],//动态表数据
+            vindex:0,//用于各个按钮的value的key
+            currentUrl:""   //获取tableData当前的应该请求的url
+        }       
+        var v=new Vue({
+            el:'#table',
+            data:datas,
+            methods:{
+                vval:vval
+            }
+        });
+        //点击最右侧编辑按钮后执行的函数
+        function zclick(event){
+          var zname=event.getAttribute("name");
+          if(zname=="edit"){
+            
+          }else if(zname=="delete"){
+
+          }else{
+
+          }
+          debugeShow(event.getAttribute("value"));
+        //   fn.call(this,zname);
+        }
+        //点击上一页，下一页后执行的函数
+        function changePage(event){
+            var sgin=event.getAttribute("sgin");
+            switch(sgin){
+                case "previous":
+                    if(v.$data.pages.current>0){
+                        v.$data.pages.current--;
+                    }else{
+                        v.$data.pages.current=0;
+                    };break;
+                case "next":
+                    if(v.$data.pages.current<v.$data.pages.count){
+                        v.$data.pages.current++;
+                    }else{
+                        v.$data.pages.current=v.$data.pages.count;
+                    };break;
+                default:
+                    alert("no value");break;
+                }
+            alert(v.$data.pages.current);
+            sendData={
+              "pageNo":v.$data.pages.current,
+              "pageSize":v.$data.pages.pageSize,
+              "pageCount":v.$data.pages.count
+            };
+            debugeShow(v.$data.currentUrl);
+            // zhttp(v.$data.currentUrl,"post",sendData,getInfoList);
+        }
+  //获取分页的回调函数
+  function getInfoList(resp){
+    v.$data.tableData=resp.vdata;
+  }
+  //点击删除所选项后执行的函数
+  function selectAll(){
+    str="";
+    $(":checkbox").each(function(){
+      if(this.checked){
+          str=str+"&"+this.getAttribute("value");
+      }
+    });
+    console.log(str);
+  }
+  //item为{}型，获取item的第vindex个key的值
+  function vval(item){
+    return Object.values(item)[datas.vindex];
+  }
+  //通用的http函数
+  function zhttp(hurl,hmethod,hdata,hfunction){
+    $.ajax({url:hurl,method:hmethod,data:hdata,
+            success:function(resp){
+              hfunction.call(this,resp);
+              v.$data.tableData=resp.vdata;
+              data_rep=resp.vdata;
+              alert(resp.msg);
+            },
+            error:function(resp){
+              alert(resp+"未知错误");
+            }
+          });
+  }
+  //编辑使用的回调函数，用于处理点击按钮后的响应
+  function fangye(v){
+    debugeShow("这是被调用的"+v);
+  }
+  //用于debug显示的辅助函数
+  function debugeShow(msg){
+    alert(msg);
+  }
+    </script>
+</body>

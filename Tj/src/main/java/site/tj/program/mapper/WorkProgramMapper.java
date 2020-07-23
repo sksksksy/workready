@@ -27,9 +27,9 @@ public interface WorkProgramMapper {
 		public int deleteEmplyeesRecord(@Param("emplRe") EmplyeesRecord emplRe);
 		public int deleteWorkPrograms(@Param("workp") WorkPrograms workProgram);
 		
-		public List<DayRecords> selectDayRecords();
-		public List<Emplyees> selectEmplyees();
-		public List<EmplyeesRecord> selectEmplyeesRecord();
-		public List<WorkPrograms> selectWorkPrograms();
+		public List<DayRecords> selectDayRecords(@Param("isPagination") boolean isp,@Param("currentNo") int currentNo,@Param("pageSize") int pageSize);
+		public List<Emplyees> selectEmplyees(@Param("isPagination") boolean isp,@Param("currentNo") int currentNo,@Param("pageSize") int pageSize);
+		public List<EmplyeesRecord> selectEmplyeesRecord(@Param("isPagination") boolean isp,@Param("currentNo") int currentNo,@Param("pageSize") int pageSize);
+		public List<WorkPrograms> selectWorkPrograms(@Param("isPagination") boolean isp,@Param("currentNo") int currentNo,@Param("pageSize") int pageSize);
 		
 }
