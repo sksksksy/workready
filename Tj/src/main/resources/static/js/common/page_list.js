@@ -21,10 +21,23 @@ datas=
         //点击最右侧编辑按钮后执行的函数
         function zclick(event){
           var zname=event.getAttribute("name");
+          var zvalue=event.getAttribute("value");
           if(zname=="edit"){
             
           }else if(zname=="delete"){
-
+            // deletet_list=[];
+            // zhttp();
+            v.$data.tableData.forEach(function(e,i){
+              t=Object.values(e)[datas.vindex];
+              if(t==zvalue){
+                  // deletet_list.push(i);
+                  v.$data.tableData.splice(i,1); 
+                  console.log(t);
+              }
+            });
+            // for(i=0;i<deletet_list.length;i++){
+            //     v.$data.tableData.splice(0,1); 
+            // }
           }else{
 
           }
@@ -98,7 +111,7 @@ datas=
   }
   //用于debug显示的辅助函数
   function debugeShow(msg){
-    alert(msg);
+    // alert(msg);
   }
   function pageDataJson(){
     return {
