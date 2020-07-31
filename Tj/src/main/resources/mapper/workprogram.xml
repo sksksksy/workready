@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.tj.program.mapper.WorkProgramMapper">
  	<insert id="saveDayRecords">
- 		insert into day_records(REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY)
+ 		insert into day_records(REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY,EMPL_NO)
  		values(
  		#{dayR.revision},
  		#{dayR.createdBy},
@@ -14,7 +14,8 @@
  		#{dayR.progNo},
  		#{dayR.addr},
  		#{dayR.dayId},
- 		#{dayR.notePay}
+ 		#{dayR.notePay},
+ 		#{dayR.emplno}
  		);
  	</insert>
  	<insert id="saveEmplyees">
@@ -97,7 +98,7 @@
  	
  	</delete>
  	<select id="selectDayRecords" resultMap="dayrecord">
- 		select REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY
+ 		select REVISION,CREATED_BY,CREATED_TIME,UPDATED_BYID,UPDATED_TIME,PROG_NO,ADDR,DAY_ID,NOTE_PAY,EMPL_NO
  		from day_records 
  		<if test="isPagination">
  			limit #{currentNo},#{pageSize}
@@ -156,6 +157,7 @@
  		<result column="ADDR" property="addr"></result>
  		<result column="DAY_ID" property="dayId"></result>
  		<result column="NOTE_PAY" property="notePay"></result>
+		<result column="EMPL_NO" property="emplno"></result>
  	</resultMap>
  	<resultMap type="site.tj.program.entity.WorkPrograms" id="workprog">
  		<result column="REVISION" property="revision"></result>

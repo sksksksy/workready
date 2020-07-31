@@ -38,7 +38,7 @@ public class UsuallyUtil {
 	public final String SeqNo(String type) {
 		String d=getNowTime("yyyyMMdd");
 		int r=sequence.getSequenceNo(type);
-		String a=type+"_"+d+"#"+r;
+		String a=type+"_"+d+"_"+r;
 		System.out.println("生成的编号："+a+" type:"+type);
 		return a;
 	}

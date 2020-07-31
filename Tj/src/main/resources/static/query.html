@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>查询统计界面</title>
         <script src="js/jquery-3.4.1.min.js"></script>
         <script src="js/util.js"></script>
+        <script src="js/vue.js"></script>
     </head>
     <body>
         <div>
             <h4>查询统计界面</h4>
         </div>
+    <div>
+        <div id="query_prog">
+            员工号:<input type="text" name="EmplNo" id="emplno"/><br>
+            项目编号:<input type="text" name="ProgNo" id="progno"/><br>
+            <button id="query_all_prog">查询</button><br>
+            <div>
+                {{info_data}}
+            </div>
+        </div>
+    </div>
+    <script>
+        infos={info_data:{}};
+        var query=new Vue({
+            el:"#query_prog",
+            data:infos
+        })
+        $("#query_all_prog").on("click",function () {
+            var u="/get/infos";
+            // var s="";
+            /*$("#query_prog input").each(function (i,e) {
+                es=e.value==undefined?"":e.value;
+                s=s+"&"+e.getAttribute("name")+"="+es;
+                // s=s+"/"+es;
+            })*/
+            send_data={
+                "EmplNo":$("#emplno").val(),
+                "ProgNo":$("#progno").val()
+            };
+            console.log(send_data);
+            // s=s.substring(1,s.length);
+            RequestSend("post",send_data,u,infos_Callback);
+        });
+        function infos_Callback(obj) {
+            infos.info_data=obj.tdata;
+        }
+    </script>
     </body>
 </html>

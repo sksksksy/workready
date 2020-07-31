@@ -6,4 +6,19 @@
     <select id="getProgNo" resultType="java.lang.String">
     	select PROG_NO from WORK_PROGRAMS;
     </select>
+    <select id="getEmplOneWordDay" resultType="double">
+        select ifnull(sum(d.DAYS),0)  from day_records d where d.EMPL_NO=#{emplNo} and d.PROG_NO=#{progNo};
+    </select>
+    <select id="getMoneyByEmplInProg" resultType="double">
+        select ifnull(sum(d.NOTE_PAY),0) from day_records d where d.EMPL_NO=#{emplNo} and d.PROG_NO=#{progNo};
+    </select>
+    <select id="getDaysInProg" resultType="double">
+        select ifnull(sum(d.DAYS),0) from day_records d where d.PROG_NO=#{progNo};
+    </select>
+    <select id="getNoteMoney" resultType="double">
+        select ifnull(sum(d.NOTE_PAY),0) from day_records d where d.PROG_NO=#{progNo};
+    </select>
+    <select id="getMoneyByProg" resultType="double">
+        select ifnull((p.PROG_PAY+p.PROG_ADD_PAY),0)  from work_programs p where p.PROG_NO=#{progNo};
+    </select>
 </mapper>

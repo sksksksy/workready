@@ -46,7 +46,10 @@
                     <td>备注金额</td><td><input  name="notePay" type="text"/></td>
                 </tr>
                 <tr>
-                    <td><input  name="save"" type="submit" value="保存" onclick="fsave('#01')"/></td><td><input  name="reset" type="reset" value="重置"/></td>
+                    <td>员工号</td><td><input  name="emplno" type="text"/></td>
+                </tr>
+                <tr>
+                    <td><input  name="save" type="submit" value="保存" onclick="fsave('#01')"/></td><td><input  name="reset" type="reset" value="重置"/></td>
                 </tr>
             </table>
         </form>
@@ -83,7 +86,7 @@
                     <td>籍贯</td><td><input  name="emplAddr" type="text"/></td>
                 </tr>
                 <tr>
-                    <td><input  name="save"" type="submit" value="保存" onclick="fsave('#02')"/></td><td><input  name="reset" type="reset" value="重置"/></td>
+                    <td><input  name="save" type="submit" value="保存" onclick="fsave('#02')"/></td><td><input  name="reset" type="reset" value="重置"/></td>
                 </tr>
             </table>
         </form>
@@ -113,7 +116,7 @@
                     <td>在该项目天数</td><td><input  name="days" type="text"/></td>
                 </tr>
                 <tr>
-                    <td><input  name="save"" type="submit" value="保存" onclick="fsave('#03')"/></td><td><input  name="reset" type="reset" value="重置"/></td>
+                    <td><input  name="save" type="submit" value="保存" onclick="fsave('#03')"/></td><td><input  name="reset" type="reset" value="重置"/></td>
                 </tr>
             </table>
         </form>
@@ -214,7 +217,7 @@
         /**
          * 获取id为n的标签下面的所有表单数据
          * */
-        function getData(n,ismap=false){
+        function getData(n,isclear=false){
             var str="";
             w=n.indexOf("#")!=-1?n:"#"+n;
             // var map=new Map();
@@ -222,11 +225,18 @@
                 if(e.getAttribute("type")=="submit"||e.getAttribute("type")=="reset"){
                     return;
                 }
-                // console.log(e.getAttribute("name"));
-                es=e.value==undefined?"":e.value;
-                str=str+e.getAttribute("name")+"="+es+"&";
+                if(isclear){
+                    e.value="";
+                }else{
+                    // console.log(e.getAttribute("name"));
+                    es=e.value==undefined?"":e.value;
+                    str=str+e.getAttribute("name")+"="+es+"&";
+                }
                 // map.set(e.getAttribute("name"),es);
             });
+            if(isclear){
+                return ;
+            }
             // console.log(map);
             return str.substring(0,str.length-1);
         }
@@ -240,10 +250,12 @@
             i=parseInt(s);
             console.log(urls[i-1]);
             RequestSend("post",_data,urls[i-1],saveSuccessful);
+            function saveSuccessful(data){
+                alert(data);
+                getData(d,isclear=true);
+            }
         }
-        function saveSuccessful(data){
-            alert(data);
-        }
+
     </script>
 </div>
 </body>

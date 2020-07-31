@@ -32,8 +32,10 @@ public class DayRecords implements Serializable,Cloneable{
     private String dayId ;
     /** 备注金额 */
     private Double notePay ;
+    /** 员工号*/
+    private String emplno;
 
-    /** 乐观锁 */
+  /** 乐观锁 */
     public Integer getRevision(){
         return this.revision;
     }
@@ -104,5 +106,12 @@ public class DayRecords implements Serializable,Cloneable{
     /** 备注金额 */
     public void setNotePay(Double notePay){
         this.notePay = notePay;
+    }
+
+    public String getEmplNo() {
+        return emplno;
+    }
+    public void setEmplNo(String emplno) {
+        this.emplno = emplno;
     }
 }

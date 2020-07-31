@@ -20,6 +20,7 @@ public class TableTitle {
 			temp.add("地址");
 			temp.add("id");
 			temp.add("备注金额");
+			temp.add("员工号");
 			break;
 		case Emplyees:
 //			temp.add("创建人");

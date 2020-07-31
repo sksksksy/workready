@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import site.tj.program.conf.GlobalParameters;
 import site.tj.program.entity.DayRecords;
 import site.tj.program.entity.Emplyees;
 import site.tj.program.entity.EmplyeesRecord;
@@ -18,11 +19,10 @@ import site.tj.program.mapper.WorkProgramMapper;
 
 @RestController
 public class QueryWorkController {
-	@Autowired
+	@Autowired(required = false)
 	WorkProgramMapper workProgramMapper;
 	@Autowired
 	TableTitle tableTitle;
-	
 	ZPage defaultZPage=new ZPage(0, 10, 100);
 	int pz=defaultZPage.getPageSize();
 	@PostMapping("/all/empl")

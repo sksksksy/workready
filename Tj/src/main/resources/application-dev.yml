@@ -6,6 +6,13 @@ spring:
     username: root
     password: root
 #    password: your127@
-  mvc:    view:      suffix: .html
-mybatis:  mapper-locations:  - classpath:mapper/*.xml
-  
+  mvc:
+    view:
+      suffix: .html
+mybatis:
+  mapper-locations:
+  - classpath:mapper/*.xml
+
+logging:
+  level:
+    com.cn.commodity.dao: debug
