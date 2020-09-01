@@ -11,7 +11,7 @@ import java.util.Map;
 public class MSResponseStatus {
 	private String msg;
 	private int statusCode;
-	private Map<String, Object> data;
+	private Object data;
 	public static enum MsStatus{
 		SUCCESSFUL(1),//成功
 		LOGIN_ERROR(-2),
@@ -28,12 +28,18 @@ public class MSResponseStatus {
 		}
 	}
 	public MSResponseStatus() {
-		data=new LinkedHashMap<String, Object>();
+		this.msg="服务调用成功";
+		this.statusCode=MsStatus.SUCCESSFUL.getVal();
 	}
-	public MSResponseStatus(String msg,MsStatus statusCode) {
+	public MSResponseStatus(Object object) {
+		this.msg="服务调用成功";
+		this.statusCode=MsStatus.SUCCESSFUL.getVal();
+		this.data=object;
+	}
+	public MSResponseStatus(String msg,MsStatus statusCode,Object data) {
 		this.msg=msg;
 		this.statusCode=statusCode.getVal();
-		data=new LinkedHashMap<String, Object>();
+		this.data=data;
 	}
 	public String getMsg() {
 		return msg;
@@ -47,16 +53,12 @@ public class MSResponseStatus {
 	public void setStatusCode(MsStatus statusCode) {
 		this.statusCode = statusCode.getVal();
 	}
-	public Map<String, Object> getData() {
+
+	public Object getData() {
 		return data;
 	}
-	public void setData(Map<String, Object> data) {
+
+	public void setData(Object data) {
 		this.data = data;
-	}
-	public void setKeyValue(String key,Object val) {
-		this.data.put(key, val);
-	}
-	public Object getValByKey(String key) {
-		return this.data.get(key);
 	}
 }

@@ -1,13 +1,24 @@
 spring:
-  datasource:    continue-on-error: true
+  datasource:
+    continue-on-error: true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: mysql://ip:3306/dataname?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=GMT%2B8
     username: root
     password: root
-  mvc:    view:#      prefix: classpath:/static/ #加上这句话后会解析出错
-      suffix: .html#    static-path-pattern: /**
-#  freemarker:#    cache: false #关闭缓存
-#    settings:#      template_update_delay: 0 #检查模版更新延迟时间
-#  thymeleaf:#    prefix: classpath:/static/
+  mvc:
+    view:
+#      prefix: classpath:/static/ #加上这句话后会解析出错
+      suffix: .html
+#    static-path-pattern: /**
+#  freemarker:
+#    cache: false #关闭缓存
+#    settings:
+#      template_update_delay: 0 #检查模版更新延迟时间
+#  thymeleaf:
+#    prefix: classpath:/static/
 #    suffix: .html
-mybatis:  mapper-locations:  - classpath:mapper/*.xml
+mybatis:
+  mapper-locations:
+  - classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

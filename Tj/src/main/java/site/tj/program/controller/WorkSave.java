@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import site.tj.program.entity.DayRecords;
@@ -13,6 +14,8 @@ import site.tj.program.entity.EmplyeesRecord;
 import site.tj.program.entity.WorkPrograms;
 import site.tj.program.mapper.WorkProgramMapper;
 import site.tj.program.service.UsuallyUtil;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class WorkSave {
@@ -30,11 +33,14 @@ public class WorkSave {
 	}
 	@PostMapping("/save/day_records")
 	@ResponseBody
-	public String saveDayRecords(DayRecords dayr){
+	public String saveDayRecords(DayRecords dayr, HttpServletRequest request){
 		dayr.setDayId(ut.SeqNo("dred"));
 		dayr.setCreatedTime(ut.getNowData());
 		dayr.setUpdatedTime(ut.getNowData());
-		
+		String emplno=request.getParameter("emplno");
+		System.out.println(emplno);
+		dayr.setEmplNo(emplno);
+		System.out.println(dayr);
 		int i= workProgramMapper.saveDayRecords(dayr);
 		i=i>0?0:-1;
 		return status.get(i);

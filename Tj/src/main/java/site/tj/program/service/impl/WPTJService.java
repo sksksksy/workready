@@ -80,7 +80,7 @@ public class WPTJService {
         BigDecimal bxmzts=new BigDecimal(xmzts);
         BigDecimal bxmzjj=new BigDecimal(xmzjj);
         BigDecimal bxmzje=new BigDecimal(xmzje);
-        BigDecimal mrmtje=bxmzje.subtract(bxmzjj).divide(bxmzts);
+        BigDecimal mrmtje=bxmzje.subtract(bxmzjj).divide(bxmzts,2,BigDecimal.ROUND_HALF_UP);
         BigDecimal grgz=mrmtje.multiply(bgrts).add(bgrzjj);
         return grgz;
     }

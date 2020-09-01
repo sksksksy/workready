@@ -4,9 +4,10 @@ package site.tj.program.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+//import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+//@Document(indexName = "dayrecord",indexStoreType = "record")
 public class DayRecords implements Serializable,Cloneable{
     /**
 	 * 
@@ -113,5 +114,21 @@ public class DayRecords implements Serializable,Cloneable{
     }
     public void setEmplNo(String emplno) {
         this.emplno = emplno;
+    }
+
+    @Override
+    public String toString() {
+        return "DayRecords{" +
+                "revision=" + revision +
+                ", createdBy='" + createdBy + '\'' +
+                ", createdTime=" + createdTime +
+                ", updatedByid='" + updatedByid + '\'' +
+                ", updatedTime=" + updatedTime +
+                ", progNo='" + progNo + '\'' +
+                ", addr='" + addr + '\'' +
+                ", dayId='" + dayId + '\'' +
+                ", notePay=" + notePay +
+                ", emplno='" + emplno + '\'' +
+                '}';
     }
 }

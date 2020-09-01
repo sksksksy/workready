@@ -1,5 +1,7 @@
 package site.part.ms.util;
 
+import org.springframework.stereotype.Component;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,6 +25,7 @@ import java.util.Map.Entry;
  * @author ZHP
  *
  */
+@Component
 public class GenerateJsDataFile {
 	private  String FILENAME="generatejs.js";
 	private final String MethodPrefix="get";

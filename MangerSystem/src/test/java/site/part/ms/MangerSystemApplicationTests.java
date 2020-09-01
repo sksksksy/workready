@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import site.part.ms.entity.User;
+import site.part.ms.struct.FileNode;
 import site.part.ms.util.GenerateJsDataFile;
 import site.part.ms.util.MSSystemStatus;
 
@@ -25,5 +26,14 @@ class MangerSystemApplicationTests {
 		GenerateJsDataFile gjdf=new GenerateJsDataFile();
 		String re=gjdf.JsonText(user).toString();
 		System.out.println(re);
+
+
+		FileNode root=new FileNode("Root");
+		root.append(new FileNode("子目录一"));
+		root.append(new FileNode("子目录二"));
+		FileNode f=new FileNode("子目录三");
+		root.append(f);
+		f.append(new FileNode("子目录"));
+
 	}
 }
